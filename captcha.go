@@ -24,12 +24,12 @@ type Captcha struct {
 	Store  Store
 }
 
-//NewCaptcha creates a captcha instance from driver and store
+// NewCaptcha creates a captcha instance from driver and store
 func NewCaptcha(driver Driver, store Store) *Captcha {
 	return &Captcha{Driver: driver, Store: store}
 }
 
-//Generate generates a random id, base64 image string or an error if any
+// Generate generates a random id, base64 image string or an error if any
 func (c *Captcha) Generate() (id, b64s string, err error) {
 	id, content, answer := c.Driver.GenerateIdQuestionAnswer()
 	item, err := c.Driver.DrawCaptcha(content)
@@ -44,10 +44,10 @@ func (c *Captcha) Generate() (id, b64s string, err error) {
 	return
 }
 
-//Verify by a given id key and remove the captcha value in store,
-//return boolean value.
-//if you has multiple captcha instances which share a same store.
-//You may want to call `store.Verify` method instead.
+// Verify by a given id key and remove the captcha value in store,
+// return boolean value.
+// if you has multiple captcha instances which share a same store.
+// You may want to call `store.Verify` method instead.
 func (c *Captcha) Verify(id, answer string, clear bool) (match bool) {
 	vv := c.Store.Get(id, clear)
 	//fix issue for some redis key-value string value

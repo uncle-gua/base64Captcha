@@ -29,7 +29,7 @@ type ItemDigit struct {
 	//rng      siprng
 }
 
-//NewItemDigit create a instance of item-digit
+// NewItemDigit create a instance of item-digit
 func NewItemDigit(width int, height int, dotCount int, maxSkew float64) *ItemDigit {
 	itemDigit := &ItemDigit{width: width, height: height, dotCount: dotCount, maxSkew: maxSkew}
 	//init image.Paletted
@@ -43,9 +43,9 @@ func createRandPaletteColors(dotCount int) color.Palette {
 	p[0] = color.RGBA{0xFF, 0xFF, 0xFF, 0x00}
 	// Primary color.
 	prim := color.RGBA{
-		uint8(rand.Intn(129)),
-		uint8(rand.Intn(129)),
-		uint8(rand.Intn(129)),
+		uint8(rand.Intn(129) + 126),
+		uint8(rand.Intn(129) + 126),
+		uint8(rand.Intn(129) + 126),
 		0xFF,
 	}
 
@@ -163,7 +163,7 @@ func (m *ItemDigit) strikeThrough() {
 	}
 }
 
-//draw digit
+// draw digit
 func (m *ItemDigit) drawDigit(digit []byte, x, y int) {
 	skf := randFloat64Range(-m.maxSkew, m.maxSkew)
 	xs := float64(x)

@@ -24,8 +24,6 @@ func Test_loadFontByName(t *testing.T) {
 	}
 
 	defer recoverPanic(t)
-	f = DefaultEmbeddedFonts.LoadFontByName("fonts/readme.md")
-
 }
 func recoverPanic(t *testing.T) {
 	r := recover()
